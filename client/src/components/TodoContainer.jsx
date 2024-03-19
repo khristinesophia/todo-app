@@ -18,11 +18,15 @@ function TodoContainer() {
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [todoToDelete, setTodoToDelete] = useState({})
 
+  const [incompleteTasksCount, setIncompleteTasksCount] = useState(0)
+
   const deleteTodo = () => {
     const updatedTodos = todos.filter((_, todoIndex) => todoIndex !== todoToDelete.index)
     localStorage.setItem('todos', JSON.stringify(updatedTodos))
     setTodos(updatedTodos)
     setShowDeleteModal(false)
+
+    setIncompleteTasksCount(todos.filter(todo => !todo.completed).length)
   }
   const handleDelete = (title, index) => {
     setTodoToDelete({ title, index })
@@ -65,15 +69,16 @@ function TodoContainer() {
 
   const incompleteAllTodos = () => {
     const updatedTodos = todos.map(todo => ({ ...todo, completed: false }))
-    
     setTodos(updatedTodos)
     localStorage.setItem('todos', JSON.stringify(updatedTodos))
+    setIncompleteTasksCount(updatedTodos.filter(todo => !todo.completed).length)
   }
-  const completeAllTodos = () => {
+   
+   const completeAllTodos = () => {
     const updatedTodos = todos.map(todo => ({ ...todo, completed: true }))
-
     setTodos(updatedTodos)
     localStorage.setItem('todos', JSON.stringify(updatedTodos))
+    setIncompleteTasksCount(updatedTodos.filter(todo => !todo.completed).length)
   }
 
   //- todo item completed status
@@ -83,6 +88,8 @@ function TodoContainer() {
 
     setTodos(updatedTodos)
     localStorage.setItem('todos', JSON.stringify(updatedTodos))
+
+    setIncompleteTasksCount(todos.filter(todo => !todo.completed).length)
   }
   //- editTodo
   //- edit todo
@@ -96,6 +103,8 @@ function TodoContainer() {
     localStorage.setItem('todos', JSON.stringify(updatedTodos))
 
     setEditing({ index: -1, title: '' })
+
+    setIncompleteTasksCount(todos.filter(todo => !todo.completed).length)
   }
   //- handleEdit
   //- input to appear for todo being edited
@@ -107,6 +116,11 @@ function TodoContainer() {
   //- create todo
   const handleSubmit = (e) => {
     e.preventDefault()
+
+    if (newTodo.trim() === '') {
+      alert('Please enter a todo item.')
+      return
+    }
 
     const todos = JSON.parse(localStorage.getItem('todos')) || []
 
@@ -129,6 +143,7 @@ function TodoContainer() {
     const todos = JSON.parse(localStorage.getItem('todos'))
     if (todos) {
       setTodos(todos)
+      setIncompleteTasksCount(todos.filter(todo => !todo.completed).length)
     }
   }
 
@@ -223,7 +238,7 @@ function TodoContainer() {
 
       <div className="card shadow mt-4 pt-3">
         <div className="d-flex justify-content-between px-4">
-          <p className="badge bg-light text-dark"># tasks left</p>
+          <p className="badge bg-light text-dark">{incompleteTasksCount} tasks left</p>
           <div>
             <button
               className="badge bg-light text-dark mb-3"
