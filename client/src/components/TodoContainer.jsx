@@ -96,6 +96,11 @@ function TodoContainer() {
   const editTodo = (e) => {
     e.preventDefault()
 
+    if (editing.title.trim() === '') {
+      alert('Please enter a todo item.')
+      return
+   }
+
     const updatedTodos = [...todos]
     updatedTodos[editing.index].title = editing.title
 
@@ -230,7 +235,7 @@ function TodoContainer() {
             className="form-control" 
             value={newTodo}
             onChange={e => setNewTodo(e.target.value)}
-            placeholder="Create a new todo..."
+            placeholder="New todo..."
           />
           <button type="submit" className="input-group-text">+</button>
         </div>
