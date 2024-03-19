@@ -1,0 +1,75 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body{
+  background-color: #FAFAFA !important;
+}
+
+
+button{
+  border: none;
+}
+hr{
+  margin: 0;
+  color: #808080;
+}
+.width-40{
+  width: 40%;
+}
+
+
+/* header, brand logo and name */
+.header{
+  width: 100vw;
+}
+.logo{
+  width: 65px;
+  height: auto;
+  margin-right: 1rem;
+}
+.brand-name{
+  font-size: 60px;
+  color: #FFFFFF;
+}
+.top{
+  top: 25%;
+  width: 100%;
+  height: auto;
+}
+
+/* create todo input */
+.input-group-text{
+  background-color: #F4512C;
+  color: #FFFFFF;
+}
+
+/* table */
+tr, th, td{
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+/* icons */
+.icon{
+  border: none;
+  border-radius: 5px;
+  padding: 0.3rem 0.5rem 0.4rem 0.5rem;
+  color: #FFFFFF;
+}
+.edit{
+  background-color: #F4512C;
+  margin-right: 0.5rem;
+}
+.delete{
+  background-color: #5E1B89;
+}
+
+/* buttons */
+.primary{
+  background-color: #F4512C !important;
+}
+.secondary{
+  background-color: #5E1B89 !important;
+}
